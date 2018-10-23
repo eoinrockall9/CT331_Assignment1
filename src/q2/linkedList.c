@@ -59,3 +59,34 @@ void deleteAfter(listElement* after){
   free(delete->data);
   free(delete);
 }
+
+int length(listElement* list) {
+    int count = 0;  // Initialize count 
+    struct listElementStruct* current = list;  // Initialize current 
+    while (current != NULL) 
+    { 
+        count++; 
+        current = current->next; 
+    } 
+    return count; 
+}
+
+void push(listElement** list, char* data, size_t size){
+    /* allocate node */
+    struct listElementStruct* new_node = 
+            (struct listElementStruct*) malloc(sizeof(struct listElementStruct*)); 
+  
+    /* put in the data  */
+    new_node->data  = data; 
+  
+    /* link the old list off the new node */
+    new_node->next = (*head_ref); 
+  
+    /* move the head to point to the new node */
+    (*head_ref)    = new_node; 
+}
+
+listElement* pop(listElement** list)
+{
+    
+}
