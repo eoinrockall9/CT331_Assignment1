@@ -107,9 +107,10 @@ void enqueue(listElement** list, char* data, size_t size)
 listElement* dequeue(listElement* list)
 {
     listElement *list = ((listElement*)list->data);
-    Node* temp = list->head->next;
+    listElement* temp = list->head->next;
     while(temp->next) temp = temp->next;
     free(temp->next);
     temp->next = 0;
     lq->size--;
+    return temp;
 }
