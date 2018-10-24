@@ -9,10 +9,10 @@ char** c;
 int main(int arg, char* argc[]){
   printf("Hello assignment1.\n");
 
-  printf("%d\n", sizeof(i));
-  printf("%d\n", sizeof(in));
-  printf("%d\n", sizeof(lng));
-  printf("%d\n", sizeof(doub));
-  printf("%d\n", sizeof(c));
+  printf("%lu\n", sizeof(i));
+  printf("%lu\n", sizeof(in));
+  printf("%lu\n", sizeof(lng));
+  printf("%lu\n", sizeof(doub));
+  printf("%lu\n", sizeof(c));
   return 0;
 }
