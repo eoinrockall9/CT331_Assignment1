@@ -21,5 +21,7 @@ void runTests(){
   traverse(l);
   printf("\n");
 
+  printf("Length: %lu", length(l));
+
   printf("\nTests complete.\n");
 }
