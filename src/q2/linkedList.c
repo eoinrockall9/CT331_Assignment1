@@ -62,7 +62,8 @@ void deleteAfter(listElement* after){
 
 int length(listElement* list) {
     int count = 0;  // Initialize count 
-    struct listElementStruct* current = list;  // Initialize current 
+    listElement *current = list;  // Initialize current 
+    
     while (current != NULL) 
     { 
         count++; 
@@ -75,24 +76,19 @@ void push(listElement** list, char* data, size_t size){
     /* make and allocate new node */
     listElement *newElement = createEl(data, size);
   
-    /* put in the data  */
-    new_node->data  = data; 
-  
     /* set the new node to point to the old head reference */
-    new_node->next = (*head_ref); 
-  
-    /* move the head reference to point to the new node */
-    (*head_ref)    = new_node; 
+    newElement->next = *list; 
+    *list = newElement; 
 }
 
-listElement* pop(listElement** list)
+listElement* pop(listElement **list)
 {
-    listElement *head = list->head;
-    if (head) {
-      list->head = head->next;
-      head->next = NULL;
+    if (*list != NULL) {
+    listElement* node = (*list)->next;
+    *list = (*list)->next;
+    return node;
     }
-    return head;
+    return *list;
 }
 
 void enqueue(listElement** list, char* data, size_t size)
@@ -106,11 +102,15 @@ void enqueue(listElement** list, char* data, size_t size)
 
 listElement* dequeue(listElement* list)
 {
-    listElement *list = ((listElement*)list->data);
-    listElement* temp = list->head->next;
-    while(temp->next) temp = temp->next;
-    free(temp->next);
-    temp->next = 0;
-    lq->size--;
-    return temp;
+    listElement *temp = list;
+    
+    //Go to element at the end aka teh one thats nextEle pointer is NULL
+    while((temp-> next)-> next != NULL) {
+        temp = temp-> next;
+    }
+    
+    listElement *tail = temp-> next;
+    temp-> next = NULL;
+    
+    return tail;
 }

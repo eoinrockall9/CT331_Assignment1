@@ -14,7 +14,7 @@ int length(listElement *list);
 
 void push(listElement** list, char* data, size_t size);
 
-listElement* pop(listElement** list);
+listElement* pop(listElement  **list);
 
 void enqueue(listElement** list, char* data, size_t size);
 
