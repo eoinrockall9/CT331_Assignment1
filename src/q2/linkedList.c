@@ -72,21 +72,44 @@ int length(listElement* list) {
 }
 
 void push(listElement** list, char* data, size_t size){
-    /* allocate node */
-    struct listElementStruct* new_node = 
-            (struct listElementStruct*) malloc(sizeof(struct listElementStruct*)); 
+    /* make and allocate new node */
+    listElement *newElement = createEl(data, size);
   
     /* put in the data  */
     new_node->data  = data; 
   
-    /* link the old list off the new node */
+    /* set the new node to point to the old head reference */
     new_node->next = (*head_ref); 
   
-    /* move the head to point to the new node */
+    /* move the head reference to point to the new node */
     (*head_ref)    = new_node; 
 }
 
 listElement* pop(listElement** list)
 {
+    listElement *head = list->head;
+    if (head) {
+      list->head = head->next;
+      head->next = NULL;
+    }
+    return head;
+}
+
+void enqueue(listElement** list, char* data, size_t size)
+{
+    listElement *newElement = createEl(data, size);
     
+    newElement->next = *list;
+    *list = newElement;
+
+}
+
+listElement* dequeue(listElement* list)
+{
+    listElement *list = ((listElement*)list->data);
+    Node* temp = list->head->next;
+    while(temp->next) temp = temp->next;
+    free(temp->next);
+    temp->next = 0;
+    lq->size--;
 }
