@@ -75,7 +75,6 @@ int length(listElement* list) {
 void push(listElement** list, char* data, size_t size){
     /* make and allocate new node */
     listElement *newElement = createEl(data, size);
-  
     /* set the new node to point to the old head reference */
     newElement->next = *list; 
     *list = newElement; 
@@ -83,12 +82,16 @@ void push(listElement** list, char* data, size_t size){
 
 listElement* pop(listElement **list)
 {
-    if (*list != NULL) {
-    listElement* node = (*list)->next;
-    *list = (*list)->next;
-    return node;
+    // make sure not empty  
+    if(length(*list) == 0){
+      return *list;
     }
-    return *list;
+    // set temp pointer to pointer of first ElementStruct
+    listElement* temp = *list;
+    if(temp){
+      *list = temp->next;
+    }
+    return temp;
 }
 
 void enqueue(listElement** list, char* data, size_t size)
@@ -102,15 +105,15 @@ void enqueue(listElement** list, char* data, size_t size)
 
 listElement* dequeue(listElement* list)
 {
-    listElement *temp = list;
-    
-    //Go to element at the end aka teh one thats nextEle pointer is NULL
-    while((temp-> next)-> next != NULL) {
-        temp = temp-> next;
+    // make sure not null 
+    if(list == NULL){
+      return list;
     }
-    
-    listElement *tail = temp-> next;
-    temp-> next = NULL;
-    
-    return tail;
+    listElement* current = list;
+    while(current->next->next != NULL){
+      current = current -> next;
+    }  
+    listElement* temp = current -> next;
+    current -> next = NULL;
+    return temp;
 }
